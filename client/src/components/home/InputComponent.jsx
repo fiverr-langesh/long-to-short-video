@@ -19,7 +19,7 @@ function InputComponent() {
         value={link}
         placeholder="Drop a video link"
       />
-      <button onClick={handleClick} className=" py-5 px-8 bg-pink-600 font-bold text-stone-50 rounded">
+      <button onClick={handleClick} className=" py-5 px-8 bg-[#FF165D] font-bold text-stone-50 rounded">
         Get clips in one click
       </button>
     </div>

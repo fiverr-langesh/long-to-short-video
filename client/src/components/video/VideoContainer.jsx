@@ -1,5 +1,6 @@
 import React from 'react'
 import Video from './Video'
+import Processing from './Processing'
 
 function VideoContainer() {
     const videos = [1, 2, 3]
@@ -12,6 +13,9 @@ function VideoContainer() {
                     return <Video key={index}/>
                 })
             }
+        </div>
+        <div className="mt-20">
+            <Processing />
         </div>
     </div>
   )
