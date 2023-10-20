@@ -1,5 +1,6 @@
 import { Inter } from 'next/font/google'
 import './globals.css'
+import Providers from '@/components/auth/Provider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -12,7 +13,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
+
+        <Providers>
+
         {children}
+        </Providers>
       
         {/* Ionic Icons */}
         <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>

@@ -1,4 +1,5 @@
 import Navbar from '@/components/common/Navbar'
+import Popup from '@/components/common/Popup'
 import HomeSection from '@/components/home/HomeSection'
 import VideoContainer from '@/components/video/VideoContainer'
 
@@ -8,6 +9,7 @@ export default function Home() {
       <Navbar />
       <HomeSection />
       <VideoContainer />
+      {/* <Popup /> */}
     </div>
   )
 }
