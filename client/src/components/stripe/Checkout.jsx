@@ -11,10 +11,14 @@ const stripePromise = loadStripe(
 
 export default function Checkout() {
   const [sessionId, setSessionId] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const notifi = (msg) => toast(msg, { type: "error" });
 
   async function createSession() {
+
+    setLoading(true);
+
     try {
       const payload = {
         plan: "Basic",
@@ -31,6 +35,8 @@ export default function Checkout() {
       console.log(err);
       if (!err.response) return notifi("Can't reach the server");
     }
+
+    setLoading(false);
   }
 
   useEffect(() => {
@@ -52,8 +58,13 @@ export default function Checkout() {
   }, [sessionId]);
 
   return (
-    <div>
-      <button onClick={createSession}>Pay</button>
-    </div>
+    <>
+      <button
+        className="bg-gray-600 py-1 px-3 rounded font-medium text-slate-50"
+        onClick={createSession}
+      >
+        {loading ? "Loading..." : "Upgrade"}
+      </button>
+    </>
   );
 }

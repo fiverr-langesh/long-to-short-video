@@ -11,7 +11,7 @@ const stripe = require("stripe")(
 router.post("/payment", async (req, res) => {
   try {
 
-    const { plan,amount } = req.body;
+    const { plan,amount ,userId} = req.body;
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
       mode: "payment",
@@ -24,12 +24,12 @@ router.post("/payment", async (req, res) => {
             },
             unit_amount: amount * 100,
           },
-                    quantity: 1,
+          quantity: 1,
         },
       ],
       success_url: "https://www.langesh.in",
       cancel_url: "https://www.langesh.in/contact",
-      client_reference_id: 1234,
+      client_reference_id: userId,
     });
 
     res.send({ id: session.id });

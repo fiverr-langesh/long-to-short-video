@@ -8,20 +8,23 @@ import { TiDocumentText } from "react-icons/ti";
 import { BsQuestionLg } from "react-icons/bs";
 import { FiLogOut } from "react-icons/fi";
 import SigninButton from "../auth/SigninButton";
+import { useSession } from "next-auth/react";
+import Checkout from "../stripe/Checkout";
 
 function Navbar() {
   const [showPopup, setShowPopup] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
   const [showOptions, setShowOptions] = useState(false);
+
+  const { data: session } = useSession()
+  
   return (
     <>
       <div className=" flex items-center justify-between">
         <h1 className=" text-4xl font-bold text-stone-50">LOGO</h1>
-        {loggedIn ? (
+        {session && session.user ? (
           <div className=" flex items-center gap-5">
-            <button className=" bg-gray-600 py-1 px-3 rounded font-medium text-slate-50">
-              Upgrade
-            </button>
+            <Checkout />
             <div className=" flex flex-col gap-1">
               <div class=" w-52 bg-gray-600 rounded-full h-2.5 dark:bg-gray-700">
                 <div class=" bg-emerald-400 h-2.5 rounded-full w-[45%]"></div>

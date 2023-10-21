@@ -17,14 +17,18 @@ function VideoContainer() {
   }
 
   async function getOuptutVedios() {
-    const user = await getUser();
+    try {
+      const user = await getUser();
 
-    if (user._id) {
-      const res = await api.get(`/video/${user._id}`);
+      if (user._id) {
+        const res = await api.get(`/video/${user._id}`);
 
-      console.log(res.data);
+        console.log(res.data);
 
-      setVideos(res.data.outputUrls);
+        setVideos(res.data.outputUrls);
+      }
+    } catch (error) {
+      console.log(error);
     }
   }
 
@@ -41,10 +45,20 @@ function VideoContainer() {
 
   return (
     <div className=" my-10">
-      <h1 className=" text-3xl font-semibold text-stone-50 my-4">Generated Videos</h1>
+      <h1 className=" text-3xl font-semibold text-stone-50 my-4">
+        Generated Videos
+      </h1>
       <div className=" flex items-center gap-7 flex-wrap">
         {videos.map((video, index) => {
-          return <Video key={index} deleteOption={true} src={video.url} videoId={video.videoId} setVideos={setVideos} />;
+          return (
+            <Video
+              key={index}
+              deleteOption={true}
+              src={video.url}
+              videoId={video.videoId}
+              setVideos={setVideos}
+            />
+          );
         })}
       </div>
       <div className="mt-20">
