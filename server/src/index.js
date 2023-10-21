@@ -4,6 +4,7 @@ const cors = require("cors");
 const { stripeRouter } = require("./routes/stripe/stripe.route");
 const connectDb = require("../utils/connectDb");
 const { userRouter } = require("./routes/user/user.rote");
+const { generateShortVideo } = require("./controllers/generate.short.video.controller");
 
 require("dotenv").config();
 
@@ -23,6 +24,7 @@ app.use(express.urlencoded({ extended: true }));
 // routes
 app.use("/api", stripeRouter);
 app.use("/api/user", userRouter);
+app.use("/api/generate-short-video", generateShortVideo);
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
