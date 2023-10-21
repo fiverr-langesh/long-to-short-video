@@ -356,25 +356,25 @@ def main(url,userId):
         create_dir(f'uploads/{userId}/inputs/')
         create_dir(f'uploads/{userId}/outputs/')
 
-        download_video(url,input_path)
+        # download_video(url,input_path)
         
-        transcript = get_transcript(video_id)
-        print(transcript)
-        interesting_segment = analyze_transcript(transcript)
-        print(interesting_segment)
-        content = interesting_segment["content"]
-        print(content)
-        parsed_content = json.loads(content)
-        print(parsed_content)
-        #pdb.set_trace()
-        segment_video(parsed_content,input_path,output_path)
+        # transcript = get_transcript(video_id)
+        # print(transcript)
+        # interesting_segment = analyze_transcript(transcript)
+        # print(interesting_segment)
+        # content = interesting_segment["content"]
+        # print(content)
+        # parsed_content = json.loads(content)
+        # print(parsed_content)
+        # #pdb.set_trace()
+        # segment_video(parsed_content,input_path,output_path)
         
-        # Loop through each segment
-        for i in range(0, 3):  # Replace 3 with the actual number of segments
-            input_file = f'{output_path}/output{str(i).zfill(3)}.mp4'
-            output_file = f'{output_path}/output_cropped{str(i).zfill(3)}.mp4'
-            faces = detect_faces(input_file)
-            crop_video(faces, input_file, output_file)
+        # # Loop through each segment
+        # for i in range(0, 3):  # Replace 3 with the actual number of segments
+        #     input_file = f'{output_path}/output{str(i).zfill(3)}.mp4'
+        #     output_file = f'{output_path}/output_cropped{str(i).zfill(3)}.mp4'
+        #     faces = detect_faces(input_file)
+        #     crop_video(faces, input_file, output_file)
         return "Success"
 
     except Exception as e:

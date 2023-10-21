@@ -14,7 +14,13 @@ class RequestModel(BaseModel):
 
 @app.post("/ai")
 def autocrop(request: RequestModel):
-    return autocropper(request.url, request.user_id)
+    autocropper(request.url, request.user_id)
+
+    output_urls = []
+    for i in range(0, 3):
+        output_urls.append(f"http://localhost:5000/uploads/{request.user_id}/outputs/output00{i}.mp4")
+
+    return {"output_urls": output_urls}
 
 # expose static files inside uploads folder
 import os
