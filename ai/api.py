@@ -15,3 +15,10 @@ class RequestModel(BaseModel):
 @app.post("/ai")
 def autocrop(request: RequestModel):
     return autocropper(request.url, request.user_id)
+
+# expose static files inside uploads folder
+import os
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
+app.mount("/uploads", StaticFiles(directory=os.path.join(os.getcwd(), "uploads")), name="uploads")
+
