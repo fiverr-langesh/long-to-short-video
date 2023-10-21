@@ -1,7 +1,20 @@
-echo "# long-to-short-video" >> README.md
-git init
-git add .
-git commit -m "first commit"
-git branch -M main
-git remote add origin https://github.com/fiverr-langesh/long-to-short-video.git
-git push -u origin main
+const express = require("express");
+const app = express();
+
+require("dotenv").config();
+
+const PORT = process.env.PORT || 5000;
+const connectDb = require("./utils/connectDb");
+
+connectDb();
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.get("/", (req, res) => {
+  res.send("Server is up and running");
+});
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
