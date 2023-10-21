@@ -23,8 +23,6 @@ async function generateShortVideo(req, res) {
 
     const { data } = aiReq;
 
-    console.log(data);
-
     let updatedVideo;
 
     if (aiReq.status === 200) {
@@ -34,7 +32,6 @@ async function generateShortVideo(req, res) {
         { new: true }
       );
 
-      console.log(updatedVideo);
     }
 
     return res.status(201).json({ message: "Video created", video: updatedVideo });

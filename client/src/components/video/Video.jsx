@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import loginImg from "../../../public/login-img.jpg";
 import Image from "next/image";
 
-function Video() {
+function Video({ src }) {
   const [hidden, setHidden] = useState(true);
   const handleClick = (e) => {
     e.preventDefault();
@@ -13,7 +13,8 @@ function Video() {
     <div className=" relative">
       <div className=" border-0 rounded-lg bg-slate-700 shadow w-fit">
         <div className=" relative h-fit">
-          <Image src={loginImg} className=" h-36 w-80 rounded-lg " alt="" />
+          <video className=" h-36 w-80 rounded-lg" src={src} controls ></video>
+          {/* <Image src={loginImg} className=" h-36 w-80 rounded-lg " alt="" /> */}
           <div className=" absolute top-1 left-2 text-xs font-semibold bg-gray-800 py-1 px-2 rounded-xl text-slate-400">
             07:30
           </div>
