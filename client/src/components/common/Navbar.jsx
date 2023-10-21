@@ -67,9 +67,7 @@ function Navbar() {
           </div>
         ) : (
           <div className=" flex items-center justify-center cursor-pointer">
-            <span className=" mt-1">
-              <ion-icon name="log-in-outline" size="large"></ion-icon>
-            </span>
+            
             <SigninButton />
           </div>
         )}
