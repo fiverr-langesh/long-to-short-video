@@ -23,9 +23,9 @@ export default function CreateAccount() {
       if (err.response.status === 400) {
         console.log(err.response.data);
 
-        router.push("/");
       }
     }
+    router.push("/");
   }
 
   //localhost:3000/api/auth/callback/google

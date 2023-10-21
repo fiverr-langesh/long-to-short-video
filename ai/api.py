@@ -12,6 +12,6 @@ class RequestModel(BaseModel):
     url: str
     user_id: str
 
-@app.post("/autocrop")
+@app.post("/ai")
 def autocrop(request: RequestModel):
     return autocropper(request.url, request.user_id)

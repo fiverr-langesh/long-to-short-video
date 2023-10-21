@@ -18,7 +18,14 @@ const SigninButton = () => {
     );
   }
   return (
-    <button onClick={() => signIn()} className="text-green-600 ml-auto">
+    <button
+      onClick={() =>
+        signIn("google", {
+          callbackUrl: "http://localhost:3000/create-account",
+        })
+      }
+      className="text-green-600 ml-auto"
+    >
       Sign In
     </button>
   );
