@@ -11,14 +11,16 @@ def root():
 class RequestModel(BaseModel):
     url: str
     user_id: str
+    video_id: str
 
 @app.post("/ai")
 def autocrop(request: RequestModel):
-    autocropper(request.url, request.user_id)
+    print(request.video_id)
+    autocropper(request.url, request.user_id,request.video_id)
 
     output_urls = []
     for i in range(0, 3):
-        output_urls.append(f"http://localhost:5000/uploads/{request.user_id}/outputs/output00{i}.mp4")
+        output_urls.append(f"http://localhost:5000/uploads/{request.user_id}/{request.video_id}/outputs/output00{i}.mp4")
 
     return {"output_urls": output_urls}
 
