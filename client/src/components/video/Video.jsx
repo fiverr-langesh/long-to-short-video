@@ -1,11 +1,13 @@
 "use client";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import loginImg from "../../../public/login-img.jpg";
 import Image from "next/image";
 import api from "@/utils/baseApi";
+import { RecentActivityContext } from "../context/RecentActivityProvider";
 
-function Video({ src, videoId, setVideos }) {
+function Video({ src, videoId, setVideos ,deleteOption}) {
   const [hidden, setHidden] = useState(true);
+
 
   const handleClick = async (e) => {
     e.preventDefault();
@@ -23,9 +25,9 @@ function Video({ src, videoId, setVideos }) {
 
       setVideos((prev) => {
         return prev.filter((video) => {
-          console.log(video.url, src, video.url !== src)
-          console.log(video.videoId, videoId, videoId !== video.videoId)
-          
+          console.log(video.url, src, video.url !== src);
+          console.log(video.videoId, videoId, videoId !== video.videoId);
+
           return video.url !== src || video.videoId !== videoId;
         });
       });
@@ -40,17 +42,19 @@ function Video({ src, videoId, setVideos }) {
         <div className=" relative h-fit">
           <video className=" h-48 w-80 rounded-t-lg" src={src} controls></video>
         </div>
-        <div className=" flex justify-center items-center cursor-pointer ">
-          <button
-            onClick={deleteVideo}
-            className="w-full font-medium text-stone-50 text-lg hover:bg-red-500 rounded-b-lg px-2 py-3"
-          >
-            Delete
-          </button>
-          {/* <div onClick={handleClick} className=" cursor-pointer">
+        {deleteOption && (
+          <div className=" flex justify-center items-center cursor-pointer ">
+            <button
+              onClick={deleteVideo}
+              className="w-full font-medium text-stone-50 text-lg hover:bg-red-500 rounded-b-lg px-2 py-3"
+            >
+              Delete
+            </button>
+            {/* <div onClick={handleClick} className=" cursor-pointer">
             <ion-icon name="ellipsis-vertical"></ion-icon>
           </div> */}
-        </div>
+          </div>
+        )}
       </div>
       {/* <div
         className={`${

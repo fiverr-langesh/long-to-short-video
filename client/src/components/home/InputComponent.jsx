@@ -1,21 +1,24 @@
 "use client";
 import api from "@/utils/baseApi";
 import { signIn, useSession } from "next-auth/react";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { FaLink } from "react-icons/fa";
 import { toast } from "react-toastify";
 import validateUrl from "../helpers/validateUrl";
+import { RecentActivityContext } from "../context/RecentActivityProvider";
 
 function InputComponent() {
   const [link, setLink] = useState("");
   const { data: session } = useSession();
   const [loading, setLoading] = useState(false);
 
+  const { setRecent, recent } = useContext(RecentActivityContext);
+  
+  console.log(recent)
+
+  const notifi = (msg, type) => toast(msg, { type });
+
   const handleClick = async () => {
-    console.log(link);
-
-    const notifi = (msg, type) => toast(msg, { type });
-
     const valid = validateUrl(link);
 
     if (!valid) {
@@ -34,9 +37,10 @@ function InputComponent() {
 
         setLoading(false);
 
-        if (res.status === 200) {
-          notifi("Video is being processed", "success");
-        }
+        notifi("Video is being processed", "success");
+
+        console.log(res.data.video);
+        setRecent(res.data.video.outputUrls);
       } catch (err) {
         console.log(err);
 
@@ -48,6 +52,7 @@ function InputComponent() {
       signIn("google", { callbackUrl: "http://localhost:3000/create-account" });
     }
   };
+
   return (
     <div className=" flex items-center justify-center gap-8 bg-gray-600 py-4 px-5 rounded-xl w-[800px]">
       <div className="">

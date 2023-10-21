@@ -42,7 +42,7 @@ function VideoContainer() {
       <h1 className=" text-3xl font-semibold text-stone-50 my-4">Generated Videos</h1>
       <div className=" flex items-center gap-7 flex-wrap">
         {videos.map((video, index) => {
-          return <Video key={index} src={video.url} videoId={video.videoId} setVideos={setVideos} />;
+          return <Video key={index} deleteOption={true} src={video.url} videoId={video.videoId} setVideos={setVideos} />;
         })}
       </div>
       <div className="mt-20">
