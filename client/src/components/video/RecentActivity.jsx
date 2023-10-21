@@ -3,9 +3,9 @@ import { RecentActivityContext } from "../context/RecentActivityProvider";
 import Video from "./Video";
 
 export default function RecentActivity() {
-    const { recent } = useContext(RecentActivityContext);
-    
-    if (!recent.length) return;
+  const { recent } = useContext(RecentActivityContext);
+
+  if (!recent.length) return;
 
   return (
     <div className=" my-10">
@@ -15,9 +15,8 @@ export default function RecentActivity() {
             return (
               <Video
                 key={index}
-                src={video.url}
-                    videoId={video.videoId}
-                    deleteOption={false}
+                src={video}
+                deleteOption={false}
                 // setVideos={setVideos}
               />
             );

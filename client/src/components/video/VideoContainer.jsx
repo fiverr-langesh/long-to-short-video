@@ -37,6 +37,8 @@ function VideoContainer() {
     }
   }, [session, executed]);
 
+  if (!videos.length) return;
+
   return (
     <div className=" my-10">
       <h1 className=" text-3xl font-semibold text-stone-50 my-4">Generated Videos</h1>

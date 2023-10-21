@@ -11,7 +11,7 @@ export default function Home() {
   const { data: session } = useSession();
 
   return (
-    <main className=" py-8 px-16 bg-slate-900">
+    <main className=" py-8 px-16 bg-slate-900 h-screen overflow-y-auto">
       <Navbar />
       <HomeSection />
       <VideoContainer />
