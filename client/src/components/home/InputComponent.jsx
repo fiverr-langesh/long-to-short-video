@@ -30,7 +30,7 @@ function InputComponent() {
         };
         setLoading(true);
 
-        const res = await api.post("/generate-short-video", payload);
+        const res = await api.post("/video", payload);
 
         setLoading(false);
 

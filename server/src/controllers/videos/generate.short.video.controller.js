@@ -1,5 +1,5 @@
-const { User } = require("../model/user.model");
-const { Video } = require("../model/video.model");
+const { User } = require("../../model/user.model");
+const { Video } = require("../../model/video.model");
 const axios = require("axios");
 
 async function generateShortVideo(req, res) {
@@ -31,10 +31,11 @@ async function generateShortVideo(req, res) {
         { outputUrls: data.output_urls },
         { new: true }
       );
-
     }
 
-    return res.status(201).json({ message: "Video created", video: updatedVideo });
+    return res
+      .status(201)
+      .json({ message: "Video created", video: updatedVideo });
   } catch (error) {
     console.log(error);
     return res.status(500).json({ message: "Internal server error" });

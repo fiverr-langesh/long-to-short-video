@@ -1,6 +1,6 @@
 const express = require("express");
-const { createUser } = require("../../controllers/createUser");
-const { getUser } = require("../../controllers/getUser");
+const { getUser } = require("../../controllers/users/getUser");
+const { createUser } = require("../../controllers/users/createUser");
 const router = express.Router();
 
 router.get("/:email", getUser);
