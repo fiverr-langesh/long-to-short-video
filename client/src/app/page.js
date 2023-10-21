@@ -1,5 +1,6 @@
 "use client";
 import Navbar from '@/components/common/Navbar'
+import Popup from '@/components/common/Popup'
 import HomeSection from '@/components/home/HomeSection'
 import VideoContainer from '@/components/video/VideoContainer'
 import Checkout from "@/components/stripe/Checkout";
@@ -31,3 +32,4 @@ export default function Home() {
     </main>
   );
 }
+     
