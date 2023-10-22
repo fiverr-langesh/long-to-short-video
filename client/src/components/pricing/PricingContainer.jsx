@@ -13,7 +13,7 @@ function PricingContainer() {
   };
 
   return (
-    <div className="h-screen bg-slate-900 p-10">
+    <div className=" bg-slate-900 p-10">
       <a href="/" className="font-medium text-slate-50 flex items-center justify-start gap-2">
         <span>
           <FaLessThan />
@@ -53,6 +53,7 @@ function PricingContainer() {
           mostPopular={false}
           type={"Free"}
           price={0}
+          subscription={false}
           optionTitle={"15 upload minutes for free"}
           option={false}
           include2={"More waiting time"}
@@ -65,6 +66,7 @@ function PricingContainer() {
           mostPopular={false}
           type={"Plus"}
           price={16.99}
+          subscription={true}
           optionTitle={"$1.20/clip"}
           option={true}
           option1={15}
@@ -80,6 +82,7 @@ function PricingContainer() {
           mostPopular={true}
           type={"Premium"}
           price={19.99}
+          subscription={true}
           optionTitle={"$0.90/clip"}
           option={true}
           option1={30}
@@ -95,6 +98,7 @@ function PricingContainer() {
           mostPopular={false}
           type={"Enterprise"}
           price={249.99}
+          subscription={true}
           optionTitle={"$0.23/clip"}
           option={true}
           option1={70}
