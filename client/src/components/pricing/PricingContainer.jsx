@@ -13,7 +13,7 @@ function PricingContainer() {
   };
 
   return (
-    <div className=" bg-slate-900 p-10 lg:p-20 xl:p-0">
+    <div className="h-screen bg-slate-900 p-10 lg:p-20 xl:p-0">
       <a href="/" className="font-medium text-slate-50 flex items-center justify-start gap-2">
         <span>
           <FaLessThan />

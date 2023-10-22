@@ -29,10 +29,11 @@ def autocrop(request: RequestModel):
     
     print(res)
 
-    if(res["error"] == "low_balance"):
+    # check response have error propertyj
+    if("error" in res):
         return {
-            "error": "Balance is low"
-        } 
+            "error": res["error"]
+        }
 
     end_time = time.time()
 
@@ -46,7 +47,7 @@ def autocrop(request: RequestModel):
     for i in range(0, 3):
         output_urls.append(f"http://localhost:5000/uploads/{request.user_id}/{request.video_id}/outputs/output00{i}.mp4")
 
-    return {"output_urls": output_urls, "time_taken": time_taken_in_minutes, "duration": res.duration}
+    return {"output_urls": output_urls, "time_taken": time_taken_in_minutes, "duration": res["duration"]}
 
 # expose static files inside uploads folder
 import os
