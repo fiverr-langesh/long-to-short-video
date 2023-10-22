@@ -19,7 +19,7 @@ function Pricing({ mostPopular, type, price, optionTitle, option, option1, optio
       <h1 className=' font-bold text-4xl text-white'>$ {price}</h1>
       {/* <h1 className=' font-bold text-4xl text-white'>$ {Number(options * price).toFixed(2)}</h1> */}
 
-      <SubscribeButton amount={price} plan={type} />
+      <SubscribeButton amount={price} plan={type} minutes={options} />
 
       <p className=' font-medium text-slate-100 -mb-3'>{optionTitle}</p>
       <div className={`${option ? "block" : "hidden"}`}>

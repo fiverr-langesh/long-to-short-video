@@ -49,12 +49,19 @@ app.post(
 
         // console.log(data.id);
         console.log(data.metadata);
+        console.log(data.client_reference_id)
         // console.log(data.amount_total);
 
         // update user credits
-        await User.findByIdAndUpdate(data.client_reference_id, {
-          $inc: { credits: Number(data.amount_total) / 100 },
-        });
+        const updated = await User.findByIdAndUpdate(
+          data.metadata.userId,
+          {
+            $inc: { credits: Number(data.metadata.minutes) },
+          },
+          { new: true }
+        );
+
+        console.log(updated)
       } return response.send();
     } catch (err) {
       console.log(err.message);

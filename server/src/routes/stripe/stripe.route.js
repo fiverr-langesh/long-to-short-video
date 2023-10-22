@@ -11,7 +11,7 @@ const stripe = require("stripe")(
 
 router.post("/payment", async (req, res) => {
   try {
-    const { plan, amount, email } = req.body;
+    const { plan, amount, email,minutes } = req.body;
 
     const user = await User.findOne({ email: email }).lean();
 
@@ -26,8 +26,9 @@ router.post("/payment", async (req, res) => {
       mode: "payment",
       payment_intent_data: {
         metadata: {
-          user_id: user._id.toString(),
+          userId: user._id.toString(),
           plan,
+          minutes
         },
       },
       line_items: [

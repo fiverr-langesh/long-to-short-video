@@ -10,7 +10,7 @@ const stripePromise = loadStripe(
   "pk_test_51MTjyySGTOfzTTM0fmvOxEfzZjURrWDApNqBTRH6iVZSZ81rVwiJWTVVE4txXfuZXXQ0tku0iLK0pYB5CdNxPVdG00zNDZyVRV"
 );
 
-export default function SubscribeButton({ amount, plan }) {
+export default function SubscribeButton({ amount, plan,minutes }) {
   const [sessionId, setSessionId] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -29,6 +29,7 @@ export default function SubscribeButton({ amount, plan }) {
       const payload = {
         plan,
         amount,
+        minutes,
         email: session.user.email,
       };
 

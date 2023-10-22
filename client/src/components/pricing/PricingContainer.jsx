@@ -13,14 +13,13 @@ function PricingContainer() {
   };
 
   return (
-    <div className="bg-slate-900 p-10">
-      <Navbar />
-      {/* <div className=" font-medium text-slate-50 flex items-center justify-start gap-2">
+    <div className="h-screen bg-slate-900 p-10">
+      <a href="/" className="font-medium text-slate-50 flex items-center justify-start gap-2">
         <span>
           <FaLessThan />
         </span>{" "}
         <span>Back</span>
-      </div> */}
+      </a>
       <div className=" flex items-center justify-center mt-10 mb-20">
         <label className="themeSwitcherTwo relative inline-flex cursor-pointer select-none items-center">
           <input
