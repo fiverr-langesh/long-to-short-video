@@ -13,20 +13,20 @@ function InputComponent() {
   const [loading, setLoading] = useState(false);
 
   const { setRecent, recent } = useContext(RecentActivityContext);
-  
-  console.log(recent)
+
+  console.log(recent);
 
   const notifi = (msg, type) => toast(msg, { type });
 
   const handleClick = async () => {
-    const valid = validateUrl(link);
+    try {
+      if (session && session.user) {
+        const valid = validateUrl(link);
 
-    if (!valid) {
-      return notifi("Invalid url", "error");
-    }
+        if (!valid) {
+          return notifi("Invalid url", "error");
+        }
 
-    if (session && session.user) {
-      try {
         const payload = {
           url: link,
           email: session.user.email,
@@ -41,15 +41,17 @@ function InputComponent() {
 
         console.log(res.data.video);
         setRecent(res.data.video.outputUrls);
-      } catch (err) {
-        console.log(err);
-
-        setLoading(false);
-        if (!err.response) return notifi("Can't reach the server", "error");
-        notifi(err.response.data.message, "error");
+      } else {
+        signIn("google", {
+          callbackUrl: "http://localhost:3000/create-account",
+        });
       }
-    } else {
-      signIn("google", { callbackUrl: "http://localhost:3000/create-account" });
+    } catch (err) {
+      console.log(err);
+
+      setLoading(false);
+      if (!err.response) return notifi("Can't reach the server", "error");
+      notifi(err.response.data.message, "error");
     }
   };
 
@@ -63,7 +65,7 @@ function InputComponent() {
         type="text"
         onChange={(e) => setLink(e.target.value)}
         value={link}
-        placeholder="Drop a video link"
+        placeholder="Drop youtube video link"
       />
       <button
         onClick={handleClick}

@@ -12,7 +12,7 @@ function HomeSection() {
       <div className="flex justify-center">
         <InputComponent />
       </div>
-       <File />
+       {/* <File /> */}
       <RecentActivity />
     </div>
   );
