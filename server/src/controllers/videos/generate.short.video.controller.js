@@ -38,7 +38,7 @@ async function generateShortVideo(req, res) {
     if (aiReq.status === 200) {
       updatedVideo = await Video.findByIdAndUpdate(
         video._id,
-        { outputUrls: data.output_urls },
+        { outputUrls: data.output_urls, processingTime: data.time_taken},
         { new: true }
       );
     }
@@ -47,7 +47,7 @@ async function generateShortVideo(req, res) {
     const updatedUser = await User.findByIdAndUpdate(
       userId,
       {
-        $inc: { usedCredits: data.time_taken },
+        $inc: { usedCredits: data.duration },
       },
       { new: true }
     );
