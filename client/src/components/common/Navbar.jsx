@@ -51,18 +51,18 @@ function Navbar() {
   return (
     <>
       <div className=" flex items-center justify-between">
-        <h1 className=" text-4xl font-bold text-stone-50">LOGO</h1>
+        <h1 className=" text-xl sm:text-2xl md:text-4xl font-bold text-stone-50">LOGO</h1>
         {session && session.user ? (
           <div className=" flex items-center gap-5">
-            <a  className="bg-gray-600 py-1 px-3 rounded font-medium text-slate-50" href="/pricing-plan">Upgrade</a>
+            <a  className=" text-xs sm:text-sm md:text-base bg-gray-600 py-1 px-2 md:px-3 rounded sm:font-medium text-slate-50" href="/pricing-plan">Upgrade</a>
             <div className=" flex flex-col gap-1">
-              <div className=" w-52 bg-gray-600 rounded-full h-2.5 dark:bg-gray-700">
+              <div className=" w-28 sm:w-40 md:w-52 bg-gray-600 rounded-full h-2.5 dark:bg-gray-700">
                 <div
                   style={{ width: `${credits.percentage}%` }}
                   className={` bg-emerald-400 h-2.5 rounded-full`}
                 ></div>
               </div>
-              <p className=" text-stone-50 font-semibold text-xs">
+              <p className=" text-stone-50 font-semibold text-[10px] sm:text-xs">
                 {credits.used}m / {credits.balHour}h { credits.balMin}m used
               </p>
             </div>
@@ -71,7 +71,7 @@ function Navbar() {
                 className=" cursor-pointer"
                 onClick={() => setShowOptions(!showOptions)}
               >
-                <BiUserCircle color="white" size={50} />
+                <BiUserCircle color="white" size={44} />
               </div>
               <div
                 className={`${

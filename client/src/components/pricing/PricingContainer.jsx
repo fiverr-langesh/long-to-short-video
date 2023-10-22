@@ -13,7 +13,7 @@ function PricingContainer() {
   };
 
   return (
-    <div className=" bg-slate-900 p-10">
+    <div className=" bg-slate-900 p-10 lg:p-20 xl:p-0">
       <a href="/" className="font-medium text-slate-50 flex items-center justify-start gap-2">
         <span>
           <FaLessThan />
@@ -48,7 +48,7 @@ function PricingContainer() {
         </label>
       </div>
 
-      <div className=" grid grid-cols-4 gap-6 px-10">
+      <div className=" grid md:grid-cols-2 xl:grid-cols-4 gap-6 px-10">
         <Pricing
           mostPopular={false}
           type={"Free"}
