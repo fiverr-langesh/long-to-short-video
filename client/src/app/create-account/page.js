@@ -38,8 +38,12 @@ export default function CreateAccount() {
   }, [session]);
 
   return (
-    <div className="absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2">
-      <h1 className="text-center">Creating Account...</h1>
+    <div className="h-screen bg-slate-900 w-screen relative">
+      <div className="absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2">
+        <h1 className="text-2xl text-white">
+          Redirecting to your dashboard, please wait...
+        </h1>
+      </div>
     </div>
   );
 }

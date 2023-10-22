@@ -25,6 +25,7 @@ import json
 import math
 import pdb
 import os
+import requests
 
 from youtube_transcript_api import YouTubeTranscriptApi
 openai.api_key = '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'  # Replace with your actual OpenAI API key
@@ -32,8 +33,16 @@ openai.api_key = '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'  # Replac
 """Cell 3: Download YouTube Video function"""
 
 def download_video(url, filename):
-    yt = YouTube(url)
-    video = yt.streams.filter(file_extension='mp4').first()
+    print("download_video",url,filename)
+    #identify youtube url or not
+    if not url.startswith("https://www.youtube.com/watch?v="):
+        # download the video from url
+        r = requests.get(url, allow_redirects=True)
+        open(filename, 'wb').write(r.content)
+
+    else:
+        yt = YouTube(url)
+        video = yt.streams.filter(file_extension='mp4').first()
 
     # Download the video
     video.download(filename=filename)
@@ -358,16 +367,16 @@ def main(url,userId,video_id_path):
 
         download_video(url,input_path)
         
-        transcript = get_transcript(video_id)
-        print(transcript)
-        interesting_segment = analyze_transcript(transcript)
-        print(interesting_segment)
-        content = interesting_segment["content"]
-        print(content)
-        parsed_content = json.loads(content)
-        print(parsed_content)
-        #pdb.set_trace()
-        segment_video(parsed_content,input_path,output_path)
+        # transcript = get_transcript(video_id)
+        # print(transcript)
+        # interesting_segment = analyze_transcript(transcript)
+        # print(interesting_segment)
+        # content = interesting_segment["content"]
+        # print(content)
+        # parsed_content = json.loads(content)
+        # print(parsed_content)
+        # #pdb.set_trace()
+        # segment_video(parsed_content,input_path,output_path)
         
         # Loop through each segment
         # for i in range(0, 3):  # Replace 3 with the actual number of segments
@@ -393,3 +402,4 @@ def main(url,userId,video_id_path):
 # Run the main function
 # main({"url": "https://www.youtube.com/watch?v=92nse3cvG_Y",
 #       "user_id" : 1234})
+

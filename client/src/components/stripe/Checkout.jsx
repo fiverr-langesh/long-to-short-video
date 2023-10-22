@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
+import { useSession } from "next-auth/react";
 
 const stripePromise = loadStripe(
   "pk_test_51MTjyySGTOfzTTM0fmvOxEfzZjURrWDApNqBTRH6iVZSZ81rVwiJWTVVE4txXfuZXXQ0tku0iLK0pYB5CdNxPVdG00zNDZyVRV"
@@ -13,6 +14,8 @@ export default function Checkout() {
   const [sessionId, setSessionId] = useState(null);
   const [loading, setLoading] = useState(false);
 
+  const {data:session} = useSession()
+
   const notifi = (msg) => toast(msg, { type: "error" });
 
   async function createSession() {
@@ -20,9 +23,15 @@ export default function Checkout() {
     setLoading(true);
 
     try {
+
+      if(!session || !session.user){
+        return notifi("Please sign in first",{type:"error"})
+      }
+
       const payload = {
         plan: "Basic",
         amount: 30,
+        email: session.user.email,
       };
 
       const req = await axios.post(

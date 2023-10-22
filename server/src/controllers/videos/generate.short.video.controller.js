@@ -14,9 +14,14 @@ async function generateShortVideo(req, res) {
 
     const userId = user._id;
 
+    if (user.usedCredits >= user.credits || user.credits === 0) {
+      await User.findByIdAndUpdate(userId, { usedCredits: 0 , credits: 0});
+      return res.status(400).json({ message: "Insufficient credits" });
+    }
+
     const video = await Video.create({ url, userId });
 
-    console.log(video)
+    console.log(video);
 
     const aiReq = await axios.post("http://localhost:5000/ai", {
       url,
@@ -25,6 +30,8 @@ async function generateShortVideo(req, res) {
     });
 
     const { data } = aiReq;
+
+    console.log("aidata", data);
 
     let updatedVideo;
 
@@ -35,6 +42,17 @@ async function generateShortVideo(req, res) {
         { new: true }
       );
     }
+
+    // update credits
+    const updatedUser = await User.findByIdAndUpdate(
+      userId,
+      {
+        $inc: { usedCredits: data.time_taken },
+      },
+      { new: true }
+    );
+
+    console.log(updatedUser);
 
     return res
       .status(201)

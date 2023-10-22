@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { v4: uuid } = require("uuid");
+const { User } = require("../../model/user.model");
 
 require("dotenv").config({ path: "../../../.env" });
 
@@ -11,7 +12,16 @@ const stripe = require("stripe")(
 router.post("/payment", async (req, res) => {
   try {
 
-    const { plan,amount ,userId} = req.body;
+    const { plan, amount, email } = req.body;
+    
+    const user = await User.findOne({ email: email }).lean();
+
+    if (!user) {
+      return res.status(404).json({
+        message: "User not found",
+      });
+    }
+
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
       mode: "payment",
@@ -27,9 +37,9 @@ router.post("/payment", async (req, res) => {
           quantity: 1,
         },
       ],
-      success_url: "https://www.langesh.in",
-      cancel_url: "https://www.langesh.in/contact",
-      client_reference_id: userId,
+      success_url: "http://localhost:3000/",
+      cancel_url: "http://localhost:3000/",
+      client_reference_id: user._id.toString(),
     });
 
     res.send({ id: session.id });

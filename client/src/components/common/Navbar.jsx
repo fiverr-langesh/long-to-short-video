@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Popup from "./Popup";
 import { BiUserCircle } from "react-icons/bi";
 import { LuLayoutDashboard } from "react-icons/lu";
@@ -8,16 +8,42 @@ import { TiDocumentText } from "react-icons/ti";
 import { BsQuestionLg } from "react-icons/bs";
 import { FiLogOut } from "react-icons/fi";
 import SigninButton from "../auth/SigninButton";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import Checkout from "../stripe/Checkout";
+import api from "@/utils/baseApi";
 
 function Navbar() {
   const [showPopup, setShowPopup] = useState(false);
-  const [loggedIn, setLoggedIn] = useState(false);
   const [showOptions, setShowOptions] = useState(false);
+  const [user, setUser] = useState(null);
+  const [credits, setCredits] = useState({
+    used: 0,
+    balance: 0,
+    percentage: 0
+  });
 
-  const { data: session } = useSession()
-  
+  const { data: session } = useSession();
+
+  const executed = useRef(false);
+
+  useEffect(() => {
+    if (!executed.current && session && session.user) {
+      executed.current = true;
+
+      async function getUser() {
+        const res = await api.get(`/user/${session.user.email}`);
+        setUser(res.data.user);
+        setCredits({
+          used: Math.round(res.data.user.usedCredits),
+          balance: res.data.user.credits,
+          percentage: (res.data.user.usedCredits / res.data.user.credits) * 100,
+        });
+      }
+
+      getUser();
+    }
+  }, [session]);
+
   return (
     <>
       <div className=" flex items-center justify-between">
@@ -26,11 +52,14 @@ function Navbar() {
           <div className=" flex items-center gap-5">
             <Checkout />
             <div className=" flex flex-col gap-1">
-              <div class=" w-52 bg-gray-600 rounded-full h-2.5 dark:bg-gray-700">
-                <div class=" bg-emerald-400 h-2.5 rounded-full w-[45%]"></div>
+              <div className=" w-52 bg-gray-600 rounded-full h-2.5 dark:bg-gray-700">
+                <div
+                  style={{ width: `${credits.percentage}%` }}
+                  className={` bg-emerald-400 h-2.5 rounded-full`}
+                ></div>
               </div>
               <p className=" text-stone-50 font-semibold text-xs">
-                31m / 1h 30m used
+                {credits.used}m / {credits.balance}m used
               </p>
             </div>
             <div className=" h-fit relative">
@@ -61,16 +90,15 @@ function Navbar() {
                   <BsQuestionLg color="whitesmoke" />
                   <p>Help Center</p>
                 </div>
-                <div className=" flex items-center gap-2 w-full hover:bg-slate-700 px-1.5 duration-300 py-1 cursor-pointer">
+                <button onClick={signOut} className=" flex items-center gap-2 w-full hover:bg-slate-700 px-1.5 duration-300 py-1 cursor-pointer">
                   <FiLogOut color="whitesmoke" />
-                  <p>Log out</p>
-                </div>
+                  <span>Log out</span>
+                </button>
               </div>
             </div>
           </div>
         ) : (
           <div className=" flex items-center justify-center cursor-pointer">
-            
             <SigninButton />
           </div>
         )}
