@@ -17,6 +17,7 @@ class RequestModel(BaseModel):
     url: str
     user_id: str
     video_id: str
+    balance_credits: float
 
 @app.post("/ai")
 def autocrop(request: RequestModel):
@@ -24,8 +25,14 @@ def autocrop(request: RequestModel):
 
     print(request.url, request.user_id, request.video_id)
 
-    duration = autocropper(request.url, request.user_id,request.video_id)
-    time.sleep(2)
+    res = autocropper(request.url, request.user_id,request.video_id, request.balance_credits)
+    
+    print(res)
+
+    if(res["error"] == "low_balance"):
+        return {
+            "error": "Balance is low"
+        } 
 
     end_time = time.time()
 
@@ -39,7 +46,7 @@ def autocrop(request: RequestModel):
     for i in range(0, 3):
         output_urls.append(f"http://localhost:5000/uploads/{request.user_id}/{request.video_id}/outputs/output00{i}.mp4")
 
-    return {"output_urls": output_urls, "time_taken": time_taken_in_minutes, "duration": duration}
+    return {"output_urls": output_urls, "time_taken": time_taken_in_minutes, "duration": res.duration}
 
 # expose static files inside uploads folder
 import os

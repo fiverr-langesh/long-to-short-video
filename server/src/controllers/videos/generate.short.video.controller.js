@@ -21,17 +21,24 @@ async function generateShortVideo(req, res) {
 
     const video = await Video.create({ url, userId });
 
-    console.log(video);
-
-    const aiReq = await axios.post("http://localhost:5000/ai", {
+    const payload = {
       url,
       user_id: userId,
       video_id: video._id,
-    });
+      balance_credits: user.credits - user.usedCredits,
+    };
+    
+    console.log(payload);
+
+    const aiReq = await axios.post("http://localhost:5000/ai",payload);
 
     const { data } = aiReq;
 
     console.log("aidata", data);
+
+    if (data?.error) {
+      return res.status(500).json({message: data.error})
+    }
 
     let updatedVideo;
 
