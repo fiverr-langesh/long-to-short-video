@@ -368,10 +368,10 @@ def main(url,userId,video_id_path,balance_credits):
 
         create_dir(f'uploads/{userId}/{video_id_path}/inputs/')
         create_dir(f'uploads/{userId}/{video_id_path}/outputs/')
-        duration = 10
+        # duration = 10
 
 
-        # duration = download_video(url,input_path)
+        duration = download_video(url,input_path)
 
         if(duration > balance_credits):
             return {"error": "low_balance"}

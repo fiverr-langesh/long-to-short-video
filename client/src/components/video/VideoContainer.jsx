@@ -6,6 +6,10 @@ import { useSession } from "next-auth/react";
 
 function VideoContainer() {
   const [videos, setVideos] = React.useState([]);
+  const demoVideos = [
+    "http://localhost:5000/uploads/demo/output000.mp4",
+    "http://localhost:5000/uploads/demo/output001.mp4",
+    "http://localhost:5000/uploads/demo/output002.mp4",]
 
   const executed = useRef(false);
 
@@ -41,12 +45,12 @@ function VideoContainer() {
     }
   }, [session, executed]);
 
-  if (!videos.length) return;
+  // if (!videos.length) return;
 
   return (
     <div className=" my-10">
       <h1 className=" text-3xl font-semibold text-stone-50 my-4">
-        Generated Videos
+        {videos.length ? "Your Videos" : "Demo Videos"}
       </h1>
       <div className=" flex items-center gap-7 flex-wrap">
         {videos.map((video, index) => {
@@ -61,11 +65,29 @@ function VideoContainer() {
           );
         })}
       </div>
-      <div className="mt-20">
+      {
+        !videos.length && (
+          <div className=" flex items-center gap-7 flex-wrap">
+            {demoVideos.map((video, index) => {
+              return (
+                <Video
+                  key={index}
+                  deleteOption={false}
+                  src={video}
+                  videoId={index}
+                  setVideos={setVideos}
+                />
+              );
+            })}
+          </div>
+        )
+      }
+      {/* <div className="mt-20">
         <Processing />
-      </div>
+      </div> */}
     </div>
   );
 }
 
 export default VideoContainer;
+
