@@ -15,7 +15,7 @@ export default function Home() {
       <Navbar />
       <HomeSection />
       <VideoContainer />
-      <PricingContainer />
+      {/* <PricingContainer /> */}
       <ToastContainer
         position="top-right"
         autoClose={5000}

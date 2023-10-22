@@ -1,6 +1,9 @@
+"use client";
+
 import React, { useState } from "react";
 import { FaLessThan } from "react-icons/fa";
 import Pricing from "./Pricing";
+import Navbar from "../common/Navbar";
 
 function PricingContainer() {
   const [isChecked, setIsChecked] = useState(false);
@@ -10,13 +13,14 @@ function PricingContainer() {
   };
 
   return (
-    <div>
-      <div className=" font-medium text-slate-50 flex items-center justify-start gap-2">
+    <div className="bg-slate-900 p-10">
+      <Navbar />
+      {/* <div className=" font-medium text-slate-50 flex items-center justify-start gap-2">
         <span>
           <FaLessThan />
         </span>{" "}
         <span>Back</span>
-      </div>
+      </div> */}
       <div className=" flex items-center justify-center mt-10 mb-20">
         <label className="themeSwitcherTwo relative inline-flex cursor-pointer select-none items-center">
           <input

@@ -82,10 +82,10 @@ function Navbar() {
                   <FiSettings color="whitesmoke" />
                   <p>Billings</p>
                 </div>
-                <div className=" flex items-center gap-2 w-full hover:bg-slate-700 px-1.5 duration-300 py-1 cursor-pointer">
+                <a href="/pricing-plan" className=" flex items-center gap-2 w-full hover:bg-slate-700 px-1.5 duration-300 py-1 cursor-pointer">
                   <TiDocumentText color="whitesmoke" />
                   <p>Plans</p>
-                </div>
+                </a>
                 <div className=" flex items-center gap-2 w-full hover:bg-slate-700 px-1.5 duration-300 py-1 cursor-pointer">
                   <BsQuestionLg color="whitesmoke" />
                   <p>Help Center</p>
