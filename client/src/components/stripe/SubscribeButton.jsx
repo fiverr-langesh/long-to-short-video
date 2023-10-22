@@ -10,27 +10,25 @@ const stripePromise = loadStripe(
   "pk_test_51MTjyySGTOfzTTM0fmvOxEfzZjURrWDApNqBTRH6iVZSZ81rVwiJWTVVE4txXfuZXXQ0tku0iLK0pYB5CdNxPVdG00zNDZyVRV"
 );
 
-export default function Checkout() {
+export default function SubscribeButton({ amount, plan }) {
   const [sessionId, setSessionId] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  const {data:session} = useSession()
+  const { data: session } = useSession();
 
   const notifi = (msg) => toast(msg, { type: "error" });
 
   async function createSession() {
-
     setLoading(true);
 
     try {
-
-      if(!session || !session.user){
-        return notifi("Please sign in first",{type:"error"})
+      if (!session || !session.user) {
+        return notifi("Please sign in first", { type: "error" });
       }
 
       const payload = {
-        plan: "Basic",
-        amount: 30,
+        plan,
+        amount,
         email: session.user.email,
       };
 
@@ -68,11 +66,17 @@ export default function Checkout() {
 
   return (
     <>
-      <button
+      {/* <button
         className="bg-gray-600 py-1 px-3 rounded font-medium text-slate-50"
         onClick={createSession}
       >
         {loading ? "Loading..." : "Upgrade"}
+      </button> */}
+      <button
+        onClick={createSession}
+        className="border border-[#FF165D] bg-[#FF165D] py-1 px-2 rounded text-lg text-slate-50 mb-3"
+      >
+        {loading ? "Loading..." : "Subscribe"}
       </button>
     </>
   );

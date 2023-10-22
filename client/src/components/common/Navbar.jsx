@@ -9,7 +9,7 @@ import { BsQuestionLg } from "react-icons/bs";
 import { FiLogOut } from "react-icons/fi";
 import SigninButton from "../auth/SigninButton";
 import { signOut, useSession } from "next-auth/react";
-import Checkout from "../stripe/Checkout";
+import Checkout from "../stripe/SubscribeButton";
 import api from "@/utils/baseApi";
 
 function Navbar() {

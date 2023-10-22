@@ -2,7 +2,6 @@
 import Navbar from "@/components/common/Navbar";
 import HomeSection from "@/components/home/HomeSection";
 import VideoContainer from "@/components/video/VideoContainer";
-import Checkout from "@/components/stripe/Checkout";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useSession } from "next-auth/react";

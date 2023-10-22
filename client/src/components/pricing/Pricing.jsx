@@ -3,9 +3,10 @@ import { TiTick } from "react-icons/ti"
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import SubscribeButton from '../stripe/SubscribeButton';
 
 function Pricing({ mostPopular, type, price, optionTitle, option, option1, option2, option3, include2, include3, include5, include6 }) {
-  const [options, setOptions] = useState('');
+  const [options, setOptions] = useState(option1);
 
   const handleChange = (event) => {
     setOptions(event.target.value);
@@ -16,20 +17,23 @@ function Pricing({ mostPopular, type, price, optionTitle, option, option1, optio
       <div className={` ${mostPopular ? "block" : "hidden"} text-xs font-medium bg-slate-700 text-slate-50 rounded-full py-0.5 px-2 w-fit`}>Most popular</div>
       <h1 className=' font-semibold text-xl text-white mb-7'>{type}</h1>
       <h1 className=' font-bold text-4xl text-white'>$ {price}</h1>
-      <button className='border border-[#FF165D] bg-[#FF165D] py-1 px-2 rounded text-lg text-slate-50 mb-3'>Subscribe</button>
+      {/* <h1 className=' font-bold text-4xl text-white'>$ {Number(options * price).toFixed(2)}</h1> */}
+
+      <SubscribeButton amount={price} plan={type} />
+
       <p className=' font-medium text-slate-100 -mb-3'>{optionTitle}</p>
       <div className={`${option ? "block" : "hidden"}`}>
         <FormControl sx={{ minWidth: 200, height:30, backgroundColor:"#1e293b" ,color:"white", borderRadius:1, }}>
           <Select
-            value={option}
+            value={options}
             onChange={handleChange}
             displayEmpty
             sx={{ height:30, color:"white", paddingTop:2, paddingBottom:2 }}
             inputProps={{ 'aria-label': 'Without label' }}
             >
-            <MenuItem value={option1}>{option1}</MenuItem>
-            <MenuItem value={option2}>{option2}</MenuItem>
-            <MenuItem value={option3}>{option3}</MenuItem>
+            <MenuItem value={option1}>{option1} upload minutes/month</MenuItem>
+            <MenuItem value={option2}>{option2} upload minutes/month</MenuItem>
+            <MenuItem value={option3}>{option3} upload minutes/month</MenuItem>
           </Select>
         </FormControl>
       </div>

@@ -11,9 +11,8 @@ const stripe = require("stripe")(
 
 router.post("/payment", async (req, res) => {
   try {
-
     const { plan, amount, email } = req.body;
-    
+
     const user = await User.findOne({ email: email }).lean();
 
     if (!user) {
@@ -25,6 +24,12 @@ router.post("/payment", async (req, res) => {
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
       mode: "payment",
+      payment_intent_data: {
+        metadata: {
+          user_id: user._id.toString(),
+          plan,
+        },
+      },
       line_items: [
         {
           price_data: {
@@ -32,7 +37,7 @@ router.post("/payment", async (req, res) => {
             product_data: {
               name: plan,
             },
-            unit_amount: amount * 100,
+            unit_amount: Math.round(amount * 100),
           },
           quantity: 1,
         },
