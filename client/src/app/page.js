@@ -6,6 +6,7 @@ import Checkout from "@/components/stripe/Checkout";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useSession } from "next-auth/react";
+import PricingContainer from "@/components/pricing/PricingContainer";
 
 export default function Home() {
   const { data: session } = useSession();
@@ -15,6 +16,7 @@ export default function Home() {
       <Navbar />
       <HomeSection />
       <VideoContainer />
+      <PricingContainer />
       <ToastContainer
         position="top-right"
         autoClose={5000}
