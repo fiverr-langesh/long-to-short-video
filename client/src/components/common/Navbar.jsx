@@ -19,6 +19,8 @@ function Navbar() {
   const [credits, setCredits] = useState({
     used: 0,
     balance: 0,
+    balHour: 0,
+    balMin: 0,
     percentage: 0
   });
 
@@ -36,6 +38,8 @@ function Navbar() {
         setCredits({
           used: Math.round(res.data.user.usedCredits),
           balance: res.data.user.credits,
+          balHour: Math.floor(res.data.user.credits / 60),
+          balMin: Math.floor(res.data.user.credits % 60),
           percentage: (res.data.user.usedCredits / res.data.user.credits) * 100,
         });
       }
@@ -59,7 +63,7 @@ function Navbar() {
                 ></div>
               </div>
               <p className=" text-stone-50 font-semibold text-xs">
-                {credits.used}m / {credits.balance}m used
+                {credits.used}m / {credits.balHour}h { credits.balMin}m used
               </p>
             </div>
             <div className=" h-fit relative">

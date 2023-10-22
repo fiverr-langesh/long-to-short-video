@@ -4,6 +4,7 @@ const VideoSchema = mongoose.Schema({
     url: String,
     userId: String,
     outputUrls: [String],
+    processingTime: Number
 }, {
     timestamps: true,
     collection: 'videos'

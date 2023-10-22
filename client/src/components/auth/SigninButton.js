@@ -10,7 +10,7 @@ const SigninButton = () => {
           callbackUrl: "http://localhost:3000/create-account",
         })
       }
-      className="text-green-600 ml-auto"
+      className="text-green-600 ml-auto text-xl"
     >
       Sign In
     </button>
