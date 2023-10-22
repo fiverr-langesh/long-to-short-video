@@ -33,7 +33,6 @@ openai.api_key = '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'  # Replac
 """Cell 3: Download YouTube Video function"""
 
 def download_video(url, filename):
-    print("download_video",url,filename)
     #identify youtube url or not
     if not url.startswith("https://www.youtube.com/watch?v="):
         # download the video from url
@@ -44,8 +43,13 @@ def download_video(url, filename):
         yt = YouTube(url)
         video = yt.streams.filter(file_extension='mp4').first()
 
-    # Download the video
-    video.download(filename=filename)
+        # Download the video
+        video.download(filename=filename)
+
+        # Calculate the duration of the video
+        duration = yt.length / 60
+        print(duration)
+        return duration
 
 def create_dir(path):
     if not os.path.exists(path):
@@ -364,19 +368,21 @@ def main(url,userId,video_id_path):
 
         create_dir(f'uploads/{userId}/{video_id_path}/inputs/')
         create_dir(f'uploads/{userId}/{video_id_path}/outputs/')
+        # duration = 10
 
-        download_video(url,input_path)
+
+        duration = download_video(url,input_path)
         
-        # transcript = get_transcript(video_id)
-        # print(transcript)
-        # interesting_segment = analyze_transcript(transcript)
-        # print(interesting_segment)
-        # content = interesting_segment["content"]
-        # print(content)
-        # parsed_content = json.loads(content)
-        # print(parsed_content)
-        # #pdb.set_trace()
-        # segment_video(parsed_content,input_path,output_path)
+        transcript = get_transcript(video_id)
+        print(transcript)
+        interesting_segment = analyze_transcript(transcript)
+        print(interesting_segment)
+        content = interesting_segment["content"]
+        print(content)
+        parsed_content = json.loads(content)
+        print(parsed_content)
+        #pdb.set_trace()
+        segment_video(parsed_content,input_path,output_path)
         
         # Loop through each segment
         # for i in range(0, 3):  # Replace 3 with the actual number of segments
@@ -384,7 +390,7 @@ def main(url,userId,video_id_path):
         #     output_file = f'{output_path}/output_cropped{str(i).zfill(3)}.mp4'
         #     faces = detect_faces(input_file)
         #     crop_video(faces, input_file, output_file)
-        return "Success"
+        return duration
 
     except Exception as e:
         print(f"Error during video cropping: {str(e)}")
