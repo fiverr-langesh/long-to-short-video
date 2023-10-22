@@ -10,7 +10,7 @@ const stripePromise = loadStripe(
   "pk_test_51MTjyySGTOfzTTM0fmvOxEfzZjURrWDApNqBTRH6iVZSZ81rVwiJWTVVE4txXfuZXXQ0tku0iLK0pYB5CdNxPVdG00zNDZyVRV"
 );
 
-export default function SubscribeButton({ amount, plan,minutes }) {
+export default function SubscribeButton({ display, amount, plan,minutes }) {
   const [sessionId, setSessionId] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -75,7 +75,7 @@ export default function SubscribeButton({ amount, plan,minutes }) {
       </button> */}
       <button
         onClick={createSession}
-        className="border border-[#FF165D] bg-[#FF165D] py-1 px-2 rounded text-lg text-slate-50 mb-3"
+        className={` ${display ? "block" : "hidden"} border border-[#FF165D] bg-[#FF165D] py-1 px-2 rounded text-lg text-slate-50 mb-3`}
       >
         {loading ? "Loading..." : "Subscribe"}
       </button>
