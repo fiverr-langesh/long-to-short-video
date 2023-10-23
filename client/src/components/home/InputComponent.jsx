@@ -56,7 +56,7 @@ function InputComponent() {
   };
 
   return (
-    <div className=" flex items-center justify-center md:gap-8 bg-gray-600 sm:py-2 md:py-4 pl-1 sm:px-5 rounded-xl w-full sm:w-[670px] md:w-[750px] lg:w-[800px]">
+    <div className=" flex flex-col sm:flex-row items-center justify-center md:gap-8 bg-gray-600 sm:py-2 md:py-4 pl-1 sm:px-5 rounded-xl w-[340px] min-[480px]:w-[480px] sm:w-[670px] md:w-[750px] lg:w-[800px]">
       <div className="hidden sm:block">
         <FaLink color="whitesmoke" size={35} />
       </div>
@@ -69,7 +69,7 @@ function InputComponent() {
       />
       <button
         onClick={handleClick}
-        className=" text-sm sm:text-base py-5 px-1 sm:px-2 md:px-4 lg:px-5 xl:px-8 bg-[#FF165D] md:font-medium lg:font-bold text-stone-50 rounded w-full"
+        className=" text-sm sm:text-base py-5 px-2 md:px-4 lg:px-5 xl:px-8 bg-[#FF165D] md:font-medium lg:font-bold text-stone-50 rounded w-full"
       >
         {loading ? "Loading..." : "Get clips in one click"}
       </button>
