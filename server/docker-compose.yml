@@ -21,6 +21,15 @@ services:
     container_name: mongodb
     volumes:
       - mongodb:/data/db
+  ai:
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile
+    image: ai
+    container_name: ai
+    ports:
+      - "5000:5000"
+    # add any additional configuration for this service
 
 
 volumes:
