@@ -41,8 +41,6 @@ def autocrop(request: RequestModel):
 
     time_taken_in_minutes = time_taken / 60
 
-    print(time_taken, time_taken_in_minutes)
-
     output_urls = []
     for i in range(0, 3):
         output_urls.append(f"http://localhost:5000/uploads/{request.user_id}/{request.video_id}/outputs/output00{i}.mp4")

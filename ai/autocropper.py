@@ -361,6 +361,9 @@ interseting_seg='''[{'text': 'happiness through Curiosity on Dr', 'start': 0.0, 
 def main(url,userId,video_id_path,balance_credits):
 
     try:
+        if not url.startswith("https://www.youtube.com/watch?v="):
+            return {"error": "Invalid youtube url"}
+
         video_id=url.split("=")[1]
         filename = 'input_video.mp4'
         input_path = f'uploads/{userId}/{video_id_path}/inputs/{filename}'

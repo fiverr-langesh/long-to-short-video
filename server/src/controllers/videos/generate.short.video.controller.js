@@ -63,7 +63,7 @@ async function generateShortVideo(req, res) {
 
     return res
       .status(201)
-      .json({ message: "Video created", video: updatedVideo });
+      .json({ message: "Video created", video: updatedVideo ,usedCredits: data.duration});
   } catch (error) {
     console.log(error);
     return res.status(500).json({ message: "Internal server error" });
