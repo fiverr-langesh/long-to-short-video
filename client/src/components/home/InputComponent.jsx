@@ -57,7 +57,7 @@ function InputComponent() {
   };
 
   return (
-    <div className=" flex flex-col sm:flex-row items-center justify-center md:gap-8 bg-gray-600 sm:py-2 md:py-4 pl-1 sm:px-5 rounded-xl w-[340px] min-[480px]:w-[480px] sm:w-[670px] md:w-[750px] lg:w-[800px]">
+    <div className=" flex flex-col sm:flex-row items-center justify-center md:gap-8 bg-gray-600 sm:py-2 md:py-4 sm:pl-1 sm:px-5 rounded-xl w-[340px] min-[480px]:w-[480px] sm:w-[670px] md:w-[750px] lg:w-[800px]">
       <div className="hidden sm:block">
         <FaLink color="whitesmoke" size={35} />
       </div>
