@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  server:
+    build: .
+    container_name: server
+    ports:
+      - "8000:8000"
+    # add any additional configuration for this service
+  webhook:
+    build:
+      context: src/webhook
+      dockerfile: Dockerfile
+    container_name: webhook
+    ports:
+      - "4242:4242"
+    # add any additional configuration for this service
