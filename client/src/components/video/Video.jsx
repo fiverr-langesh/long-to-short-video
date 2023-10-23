@@ -17,7 +17,7 @@ function Video({ src, videoId, setVideos ,deleteOption}) {
   async function deleteVideo() {
     try {
       const res = await api.post(`/video/delete`, {
-        outputUrl: src,
+      outputUrl: src,
         videoId,
       });
 
@@ -37,9 +37,8 @@ function Video({ src, videoId, setVideos ,deleteOption}) {
   }
 
   return (
-    <div className=" relative">
       <div className=" border-0 rounded-lg bg-slate-700 shadow w-fit">
-        <div className=" relative h-fit">
+        <div className="h-fit">
           <video className=" h-48 w-80 rounded-t-lg" src={src} controls></video>
         </div>
         {deleteOption && (
@@ -50,23 +49,9 @@ function Video({ src, videoId, setVideos ,deleteOption}) {
             >
               Delete
             </button>
-            {/* <div onClick={handleClick} className=" cursor-pointer">
-            <ion-icon name="ellipsis-vertical"></ion-icon>
-          </div> */}
           </div>
         )}
       </div>
-      {/* <div
-        className={`${
-          hidden ? " hidden" : "block"
-        } absolute -bottom-8 right-1 flex items-center gap-3 border rounded-lg bg-gray-800 py-1.5 px-4 w-fit`}
-      >
-        <span className=" mt-1">
-          <ion-icon name="trash-outline"></ion-icon>
-        </span>
-        <p className=" text-stone-50">Delete</p>
-      </div> */}
-    </div>
   );
 }
 

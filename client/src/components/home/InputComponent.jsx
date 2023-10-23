@@ -12,7 +12,7 @@ function InputComponent() {
   const { data: session } = useSession();
   const [loading, setLoading] = useState(false);
 
-  const { setRecent, recent ,setCredit} = useContext(RecentActivityContext);
+  const { setRecent, recent ,setCredit,setProcessingTime} = useContext(RecentActivityContext);
 
   console.log(recent);
 
@@ -41,7 +41,9 @@ function InputComponent() {
 
         console.log(res.data.video);
         setRecent(res.data.video.outputUrls);
-        setCredit(res.data.video.usedCredits);
+        setCredit(res.data.usedCredits);
+        setProcessingTime(res.data.video.processingTime.toFixed(2));
+        // setProcessingTime(2.2)
       } else {
         signIn("google", {
           callbackUrl: "http://localhost:3000/create-account",

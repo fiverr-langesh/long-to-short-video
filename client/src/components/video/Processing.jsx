@@ -1,11 +1,16 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
 
 
-function Processing() {
+function Processing({time}) {
     const [value, setValue] = React.useState([20, 37]);
+
+    useEffect(() => {
+        setValue([0,time])
+    
+    },[time])
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -17,11 +22,11 @@ function Processing() {
     const [buttonClicked, setButtonClicked] = useState(1)
 
   return (
-    <div className="flex justify-center items-center">
+    <div className="flex justify-center items-center mt-10">
         <div className=' flex flex-col gap-6 border border-stone-400 bg-gray-700 rounded py-12 px-12 w-[700px]'>
             <div>
                 <h1 className=' flex items-center gap-3 mb-4'>
-                    <span className=' text-slate-50 text-lg font-bold'>processing timeframe</span>
+                    <span className=' text-slate-50 text-lg font-bold'>{"processing timeframe ( minutes )"}</span>
                     <span className=' text-[#66FFA3] bg-slate-600 py-1 px-3 rounded'>Credit saver</span>
                 </h1>
                 <Box sx={{ }}>
@@ -29,11 +34,14 @@ function Processing() {
                         getAriaLabel={() => 'Time duration'}
                         sx={{ color:"#FF165D", height: 8  }}
                         value={value}
-                        onChange={handleChange}
+                        // onChange={handleChange}
                         valueLabelDisplay="auto"
                         getAriaValueText={valuetext}
-                        min={0}
-                        max={100}
+                          min={0}
+                          step={0.01}
+                          max={10}
+                          
+
                     />
                 </Box>
             </div>

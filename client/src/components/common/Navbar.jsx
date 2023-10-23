@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import Popup from "./Popup";
 import { BiUserCircle } from "react-icons/bi";
 import { LuLayoutDashboard } from "react-icons/lu";
@@ -11,6 +11,7 @@ import SigninButton from "../auth/SigninButton";
 import { signOut, useSession } from "next-auth/react";
 import Checkout from "../stripe/SubscribeButton";
 import api from "@/utils/baseApi";
+import { RecentActivityContext } from "../context/RecentActivityProvider";
 
 function Navbar() {
   const [showPopup, setShowPopup] = useState(false);
@@ -24,9 +25,24 @@ function Navbar() {
     percentage: 0
   });
 
+  const recent = useContext(RecentActivityContext)
+
   const { data: session } = useSession();
 
   const executed = useRef(false);
+
+  useEffect(() => {
+    if (recent.recent.length && recent.credit) {
+      setCredits(prev => {
+        return {
+          ...prev,
+          used: Math.round(recent.credit + prev.used),
+          percentage: (recent.credit / user.credits) * 100
+        }
+      })
+    
+    }
+  },[recent])
 
   useEffect(() => {
     if (!executed.current && session && session.user) {

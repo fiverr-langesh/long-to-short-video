@@ -49,10 +49,10 @@ function VideoContainer() {
 
   return (
     <div className=" my-10">
-      <h1 className=" text-3xl font-semibold text-stone-50 my-4">
+      <h1 className=" text-3xl font-semibold text-stone-50 my-4 pb-10">
         {videos.length ? "Your Videos" : "Demo Videos"}
       </h1>
-      <div className=" flex items-center gap-7 flex-wrap">
+      <div className=" flex justify-center items-center gap-7 flex-wrap">
         {videos.map((video, index) => {
           return (
             <Video
@@ -67,7 +67,7 @@ function VideoContainer() {
       </div>
       {
         !videos.length && (
-          <div className=" flex items-center gap-7 flex-wrap">
+          <div className=" flex justify-center items-center gap-7 flex-wrap">
             {demoVideos.map((video, index) => {
               return (
                 <Video
