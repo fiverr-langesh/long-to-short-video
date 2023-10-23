@@ -16,4 +16,13 @@ services:
     container_name: webhook
     ports:
       - "4242:4242"
+  mongodb:
+    image: mongo
+    container_name: mongodb
+    volumes:
+      - mongodb:/data/db
+
+
+volumes:
+  mongodb:
     # add any additional configuration for this service
