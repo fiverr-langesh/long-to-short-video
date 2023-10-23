@@ -6,3 +6,4 @@ numpy
 requests
 fastapi
 pydantic
+aiohttp==3.7.4

@@ -1,6 +1,8 @@
 # Use an official Python runtime as a parent image
 FROM python:3
 
+RUN apt-get update && apt-get install -y build-essential
+
 # Set the working directory to /app
 WORKDIR /app
 
