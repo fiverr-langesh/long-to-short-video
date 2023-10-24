@@ -7,9 +7,9 @@ import { useSession } from "next-auth/react";
 function VideoContainer() {
   const [videos, setVideos] = React.useState([]);
   const demoVideos = [
-    "http://localhost:5000/uploads/demo/output000.mp4",
-    "http://localhost:5000/uploads/demo/output001.mp4",
-    "http://localhost:5000/uploads/demo/output002.mp4",]
+    `${process.env.NEXT_PUBLIC_AI_URL}/uploads/demo/output000.mp4`,
+    `${process.env.NEXT_PUBLIC_AI_URL}/uploads/demo/output001.mp4`,
+    `${process.env.NEXT_PUBLIC_AI_URL}/uploads/demo/output002.mp4`,]
 
   const executed = useRef(false);
 

@@ -16,8 +16,7 @@ const port = process.env.PORT || 8000;
 connectDb();
 
 app.use(cors({
-  origin: '*',
-  credentials: true,
+  origin: 'http://fiverr.langesh.in:3000',
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

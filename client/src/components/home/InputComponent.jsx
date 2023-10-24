@@ -46,7 +46,7 @@ function InputComponent() {
         // setProcessingTime(2.2)
       } else {
         signIn("google", {
-          callbackUrl: "http://localhost:3000/create-account",
+          callbackUrl: "http://fiverr.langesh.in:3000/create-account",
         });
       }
     } catch (err) {
