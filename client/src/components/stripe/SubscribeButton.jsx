@@ -34,7 +34,7 @@ export default function SubscribeButton({ display, amount, plan,minutes }) {
       };
 
       const req = await axios.post(
-        "http://localhost:8000/api/payment",
+        `${process.env.NEXT_PUBLIC_API_URL}/api/payment`,
         payload
       );
       const { data } = req;

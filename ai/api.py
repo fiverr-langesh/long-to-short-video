@@ -43,7 +43,7 @@ def autocrop(request: RequestModel):
 
     output_urls = []
     for i in range(0, 3):
-        output_urls.append(f"http://localhost:5000/uploads/{request.user_id}/{request.video_id}/outputs/output00{i}.mp4")
+        output_urls.append(f"http://fiverr.langesh.in:5000/uploads/{request.user_id}/{request.video_id}/outputs/output00{i}.mp4")
 
     return {"output_urls": output_urls, "time_taken": time_taken_in_minutes, "duration": res["duration"]}
 

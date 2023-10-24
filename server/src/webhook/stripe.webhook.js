@@ -12,7 +12,9 @@ connectDb();
 
 // This is your Stripe CLI webhook secret for testing your endpoint locally.
 const endpointSecret =
-  "whsec_fa606cc8c0a116ad23ed490c6ef869908e404a7d8696965e0bd57bf7c99bc83a";
+  "whsec_m4TF8ulpJqT47tQdoTkpzKvNVhSCRjFz";
+
+  app.get("/",(req,res) => res.json("webhook is up"))
 
 app.post(
   "/webhook",

@@ -12,7 +12,7 @@ const SigninButton = () => {
       }
       className="text-green-600 ml-auto text-xl"
     >
-      Sign
+      Sign in
     </button>
   );
 };

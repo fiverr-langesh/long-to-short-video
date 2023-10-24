@@ -28,7 +28,7 @@ import os
 import requests
 
 from youtube_transcript_api import YouTubeTranscriptApi
-openai.api_key = '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'  # Replace with your actual OpenAI API key
+openai.api_key = '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'  # Replace with your actual OpenAI API key
 
 """Cell 3: Download YouTube Video function"""
 
