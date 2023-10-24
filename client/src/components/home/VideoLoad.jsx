@@ -19,7 +19,7 @@ function VideoLoad() {
           <span className=' flex items-center gap-4'>
             <h1 className=' text-stone-400 mt-4 font-semibold text-lg'>Caption: </h1>
             <FormControl variant="standard" className=' text-slate-50' sx={{ minWidth: 120, }}>
-              <InputLabel className=' text-slate-50' id="demo-simple-select-standard-label">Language</InputLabel>
+              {/* <InputLabel className=' text-slate-50' id="demo-simple-select-standard-label">Language</InputLabel> */}
               <Select
                 labelId="demo-simple-select-standard-label"
                 id="demo-simple-select-standard"

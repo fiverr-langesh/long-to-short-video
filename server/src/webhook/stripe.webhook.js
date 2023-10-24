@@ -25,21 +25,44 @@ app.post(
     try {
       event = stripe.webhooks.constructEvent(request.body, sig, endpointSecret);
 
-      if (event.type === "checkout.session.completed") {
+      // if (event.type === "checkout.session.completed") {
+      //   console.log("Checkout session completed");
+      //   const data = event.data.object;
+
+      //   console.log('event', event)
+
+      //   console.log(data.id);
+      //   console.log(data.client_reference_id);
+      //   console.log(data.amount_total);
+
+      //   // update user credits
+      //   await User.findByIdAndUpdate(data.client_reference_id, {
+      //     $inc: { credits: Number(data.amount_total) / 100 },
+      //   });
+      // }
+
+      if (event.type === "payment_intent.succeeded") {
         console.log("Checkout session completed");
         const data = event.data.object;
 
-        console.log(data.id);
-        console.log(data.client_reference_id);
-        console.log(data.amount_total);
+        // console.log("event", event);
+
+        // console.log(data.id);
+        console.log(data.metadata);
+        console.log(data.client_reference_id)
+        // console.log(data.amount_total);
 
         // update user credits
-        await User.findByIdAndUpdate(data.client_reference_id, {
-          $inc: { credits: Number(data.amount_total) / 100 },
-        });
-      }
+        const updated = await User.findByIdAndUpdate(
+          data.metadata.userId,
+          {
+            $inc: { credits: Number(data.metadata.minutes) },
+          },
+          { new: true }
+        );
 
-      return response.send();
+        console.log(updated)
+      } return response.send();
     } catch (err) {
       console.log(err.message);
       response.status(400).send(`Webhook Error: ${err.message}`);

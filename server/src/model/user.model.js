@@ -18,6 +18,10 @@ const userSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
+    plan: {
+      type: String,
+      default: "Free",
+    },
   },
   {
     timestamps: true,

@@ -2,3 +2,8 @@ pytube
 opencv-python
 openai
 youtube-transcript-api
+numpy
+requests
+fastapi
+pydantic
+aiohttp==3.7.4

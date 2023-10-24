@@ -12,21 +12,21 @@ function InputComponent() {
   const { data: session } = useSession();
   const [loading, setLoading] = useState(false);
 
-  const { setRecent, recent } = useContext(RecentActivityContext);
-  
-  console.log(recent)
+  const { setRecent, recent ,setCredit,setProcessingTime} = useContext(RecentActivityContext);
+
+  console.log(recent);
 
   const notifi = (msg, type) => toast(msg, { type });
 
   const handleClick = async () => {
-    const valid = validateUrl(link);
+    try {
+      if (session && session.user) {
+        const valid = validateUrl(link);
 
-    if (!valid) {
-      return notifi("Invalid url", "error");
-    }
+        if (!valid) {
+          return notifi("Invalid url", "error");
+        }
 
-    if (session && session.user) {
-      try {
         const payload = {
           url: link,
           email: session.user.email,
@@ -41,33 +41,38 @@ function InputComponent() {
 
         console.log(res.data.video);
         setRecent(res.data.video.outputUrls);
-      } catch (err) {
-        console.log(err);
-
-        setLoading(false);
-        if (!err.response) return notifi("Can't reach the server", "error");
-        notifi(err.response.data.message, "error");
+        setCredit(res.data.usedCredits);
+        setProcessingTime(res.data.video.processingTime.toFixed(2));
+        // setProcessingTime(2.2)
+      } else {
+        signIn("google", {
+          callbackUrl: "http://localhost:3000/create-account",
+        });
       }
-    } else {
-      signIn("google", { callbackUrl: "http://localhost:3000/create-account" });
+    } catch (err) {
+      console.log(err);
+
+      setLoading(false);
+      if (!err.response) return notifi("Can't reach the server", "error");
+      notifi(err.response.data.message, "error");
     }
   };
 
   return (
-    <div className=" flex items-center justify-center gap-8 bg-gray-600 py-4 px-5 rounded-xl w-[800px]">
-      <div className="">
+    <div className=" flex flex-col sm:flex-row items-center justify-center md:gap-8 bg-gray-600 sm:py-2 md:py-4 sm:pl-1 sm:px-5 rounded-xl w-[340px] min-[480px]:w-[480px] sm:w-11/12 md:w-[750px] lg:w-[800px]">
+      <div className="hidden sm:block pl-5">
         <FaLink color="whitesmoke" size={35} />
       </div>
       <input
-        className=" border-0 py-4 px-6 rounded bg-gray-600 text-stone-50 focus:outline-none placeholder:text-2xl text-2xl"
+        className=" border-0 py-4 px-2 sm:px-6 rounded bg-gray-600 text-stone-50 focus:outline-none placeholder:md:text-2xl sm:text-lg md:text-2xl "
         type="text"
         onChange={(e) => setLink(e.target.value)}
         value={link}
-        placeholder="Drop a video link"
+        placeholder="Drop youtube video link"
       />
       <button
         onClick={handleClick}
-        className=" py-5 px-8 bg-[#FF165D] font-bold text-stone-50 rounded"
+        className=" text-sm sm:text-base py-5 px-2 md:px-4 lg:px-5 xl:px-8 bg-[#FF165D] md:font-medium lg:font-bold text-stone-50 rounded w-full"
       >
         {loading ? "Loading..." : "Get clips in one click"}
       </button>

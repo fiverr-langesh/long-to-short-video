@@ -1,6 +1,9 @@
+"use client";
+
 import React, { useState } from "react";
 import { FaLessThan } from "react-icons/fa";
 import Pricing from "./Pricing";
+import Navbar from "../common/Navbar";
 
 function PricingContainer() {
   const [isChecked, setIsChecked] = useState(false);
@@ -10,13 +13,13 @@ function PricingContainer() {
   };
 
   return (
-    <div>
-      <div className=" font-medium text-slate-50 flex items-center justify-start gap-2">
+    <div className="h-screen overflow-auto bg-slate-900 p-10 lg:p-20 xl:p-0">
+      <a href="/" className="font-medium text-slate-50 flex items-center justify-start gap-2 pt-10 px-10">
         <span>
           <FaLessThan />
         </span>{" "}
         <span>Back</span>
-      </div>
+      </a>
       <div className=" flex items-center justify-center mt-10 mb-20">
         <label className="themeSwitcherTwo relative inline-flex cursor-pointer select-none items-center">
           <input
@@ -45,11 +48,12 @@ function PricingContainer() {
         </label>
       </div>
 
-      <div className=" grid grid-cols-4 gap-6 px-10">
+      <div className=" grid md:grid-cols-2 xl:grid-cols-4 gap-6 px-10">
         <Pricing
           mostPopular={false}
           type={"Free"}
           price={0}
+          subscription={false}
           optionTitle={"15 upload minutes for free"}
           option={false}
           include2={"More waiting time"}
@@ -62,11 +66,12 @@ function PricingContainer() {
           mostPopular={false}
           type={"Plus"}
           price={16.99}
+          subscription={true}
           optionTitle={"$1.20/clip"}
           option={true}
-          option1={"15 upload minutes/month"}
-          option2={"30 upload minutes/month"}
-          option3={"40 upload minutes/month"}
+          option1={15}
+          option2={30}
+          option3={40}
           include2={"Preferential queue"}
           include3={"Without watermark"}
           include5={"Up to 10GB per upload"}
@@ -77,11 +82,12 @@ function PricingContainer() {
           mostPopular={true}
           type={"Premium"}
           price={19.99}
+          subscription={true}
           optionTitle={"$0.90/clip"}
           option={true}
-          option1={"30 upload minutes/month"}
-          option2={"50 upload minutes/month"}
-          option3={"70 upload minutes/month"}
+          option1={30}
+          option2={50}
+          option3={70}
           include2={"Preferential queue"}
           include3={"Without watermark"}
           include5={"Up to 10GB per upload"}
@@ -92,11 +98,12 @@ function PricingContainer() {
           mostPopular={false}
           type={"Enterprise"}
           price={249.99}
+          subscription={true}
           optionTitle={"$0.23/clip"}
           option={true}
-          option1={"70 upload minutes/month"}
-          option2={"90 upload minutes/month"}
-          option3={"120 upload minutes/month"}
+          option1={70}
+          option2={90}
+          option3={120}
           include2={"Preferential queue"}
           include3={"Without watermark"}
           include5={"Up to 10GB per upload"}

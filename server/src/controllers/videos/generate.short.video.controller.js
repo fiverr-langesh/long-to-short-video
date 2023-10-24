@@ -21,24 +21,31 @@ async function generateShortVideo(req, res) {
 
     const video = await Video.create({ url, userId });
 
-    console.log(video);
-
-    const aiReq = await axios.post("http://localhost:5000/ai", {
+    const payload = {
       url,
       user_id: userId,
       video_id: video._id,
-    });
+      balance_credits: user.credits - user.usedCredits,
+    };
+    
+    console.log(payload);
+
+    const aiReq = await axios.post("http://localhost:5000/ai",payload);
 
     const { data } = aiReq;
 
     console.log("aidata", data);
+
+    if (data?.error) {
+      return res.status(500).json({message: data.error})
+    }
 
     let updatedVideo;
 
     if (aiReq.status === 200) {
       updatedVideo = await Video.findByIdAndUpdate(
         video._id,
-        { outputUrls: data.output_urls },
+        { outputUrls: data.output_urls, processingTime: data.time_taken},
         { new: true }
       );
     }
@@ -47,7 +54,7 @@ async function generateShortVideo(req, res) {
     const updatedUser = await User.findByIdAndUpdate(
       userId,
       {
-        $inc: { usedCredits: data.time_taken },
+        $inc: { usedCredits: data.duration },
       },
       { new: true }
     );
@@ -56,7 +63,7 @@ async function generateShortVideo(req, res) {
 
     return res
       .status(201)
-      .json({ message: "Video created", video: updatedVideo });
+      .json({ message: "Video created", video: updatedVideo ,usedCredits: data.duration});
   } catch (error) {
     console.log(error);
     return res.status(500).json({ message: "Internal server error" });
