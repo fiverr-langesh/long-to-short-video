@@ -6,7 +6,7 @@ const { User } = require("../model/user.model");
 const connectDb = require("../../utils/connectDb")
 const app = express();
 
-require("dotenv").config();
+require("dotenv").config({path: "../../.env"});
 
 connectDb();
 
