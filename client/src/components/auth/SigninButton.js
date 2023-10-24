@@ -6,7 +6,9 @@ const SigninButton = () => {
   return (
     <button
       onClick={() =>
-        signIn()
+        signIn("google", {
+          callbackUrl: "http://fiverr.langesh.in:3000/create-account"
+        })
       }
       className="text-green-600 ml-auto text-xl"
     >

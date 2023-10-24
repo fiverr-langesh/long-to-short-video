@@ -17,7 +17,9 @@ connectDb();
 
 app.use(cors({
   origin: 'http://fiverr.langesh.in:3000',
+  credentials: true, // Allow credentials (cookies, authorization headers, etc.)
 }));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
